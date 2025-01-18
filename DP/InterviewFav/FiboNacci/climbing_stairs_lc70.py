@@ -78,7 +78,17 @@ class Solution:
 
         
         
-        
+'''
+Can look at it from upwards or from downwards 
+Climb(n)=climb(n-1) + climb(n-2) 
+
+If n==0 on ground =>0 ways 
+If n==1 on first floor and ways to jump on ground=>1 
+N==2, 2 ways to jump on ground 
+
+In constant space: Almost like Fibonacci 
+
+'''       
 
         
         

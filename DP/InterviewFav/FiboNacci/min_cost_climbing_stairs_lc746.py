@@ -75,4 +75,9 @@ class Solution:
         return min(cost[n-1],cost[n-2])
 
 
-        
+'''
+result is min (start at 0 index, start at 1 index)
+at every index, you include current pese and now can take one step and two step so return min of both
+
+dp:
+think about what will it take to reach at ith, ith cost and min of either one step and 2 step before'''
