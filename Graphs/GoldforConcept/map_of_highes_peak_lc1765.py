@@ -1,3 +1,5 @@
+#solution1: multi source BFS so cool
+from typing import List
 from queue import Queue
 class Solution:
     def highestPeak(self, isWater: List[List[int]]) -> List[List[int]]:
