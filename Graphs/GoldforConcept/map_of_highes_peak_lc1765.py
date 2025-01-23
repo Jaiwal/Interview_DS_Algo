@@ -22,9 +22,9 @@ class Solution:
             for _ in range(q_size):
                 i,j=q.get()
 
-                for dr,dc in [(0,1),(0,-1),(1,0),(-1,0)]:
-                    i_=i+dr
-                    j_=j+dc
+                for r,c in [(0,1),(0,-1),(1,0),(-1,0)]:
+                    i_=i+r
+                    j_=j+c
 
                     if 0<=i_<len(isWater) and 0<=j_<len(isWater[0]) and height[i_][j_]==-1:
                         height[i_][j_]=height[i][j]+1
