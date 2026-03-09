@@ -1,0 +1,116 @@
+#######################################DFS###############################################
+'''
+from collections import defaultdict 
+class Solution:
+    def isCycle(self, V, edges):
+        graph=defaultdict(list)
+        
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+            
+        visited=[False for _ in range(V)]
+        
+        for node in range(V):
+            if not visited[node]:
+                if self.checkCycle(node,visited,graph,-1):
+                    return True
+                    
+        return False
+        
+    def checkCycle(self,node,visited,graph,parent):
+        visited[node]=True
+        
+        for neighbour in graph[node]:
+            if not visited[neighbour]:
+                if self.checkCycle(neighbour,visited,graph,node):
+                    return True
+            elif neighbour!=parent:
+                return True
+                
+        return False
+
+#######################################BFS###############################################
+'''
+'''
+from collections import defaultdict 
+class Solution:
+
+    
+    def isCycle(self, V, edges):
+        graph=defaultdict(list)
+        
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+            
+        visited=[False for _ in range(V)]
+        
+        for node in range(V):
+            if not visited[node]:
+                if self.checkCycle(node,visited,graph,-1):
+                    return True
+                    
+        return False
+        
+    def checkCycle(self,node,visited,graph,parent):
+        q=[]
+        visited[node]=True
+        q.append((node,parent))
+        
+        while q:
+            node,parent=q.pop(0)
+            for neighbour in graph[node]:
+                if not visited[neighbour]:
+                    visited[neighbour]=True
+                    q.append((neighbour,node))
+                elif neighbour!=parent:
+                    return True
+                
+        return False
+'''
+        
+#######################################DSU###############################################
+
+from collections import defaultdict 
+class Solution:
+    
+    def find(self,x,parent):
+        if x==parent[x]:
+            return x
+        parent[x]=self.find(x,parent[x])
+        return parent[x]
+        
+    def union(self,x,y,parent,rank):
+        leader_x=self.find(x,parent)
+        leader_y=self.find(y,parent)
+        
+        if rank[leader_x]<rank[leader_y]:
+            parent[leader_x]=leader_y
+        elif rank[leader_x]>rank[leader_y]:
+            parent[leader_y]=leader_y
+        else:
+            parent[leader_y]=leader_x
+            rank[leader_x]+=1
+    
+    def isCycle(self, V, edges):
+        parent=[i for i in range(V)]
+        rank=[0 for i in range(V)]
+        
+        graph=defaultdict(list)
+        
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+            
+        for u in range(V):
+            for v in graph[u]:
+                if u<v: 
+                    parent_u=self.find(u,parent)
+                    parent_v=self.find(v,parent)
+                    if parent_u==parent_v:
+                        return True
+                    self.union(u,v,parent,rank)
+                        
+        return False
+        
